@@ -1,0 +1,23 @@
+.navigation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2D313A;
+    padding: 10px;
+    width: 100vw;
+
+    div {
+        width: 90%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #ffffff;
+    }
+}

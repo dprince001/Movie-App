@@ -1,0 +1,36 @@
+.movie-card {
+    border-radius: 12px;
+    padding: 5px;
+    background-color: #282C34;
+
+    &:hover {
+        background-color: #CED1D6;
+        color: #282C34;
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px;
+    }
+
+    .movie-poster {
+        width: 100%;
+    }
+
+    .movie-type, .movie-title {
+        text-transform: capitalize;
+    }
+
+    .movie-title {
+        text-align: center;
+        font-weight: 500;
+        padding: 3px 0;
+    }
+
+    img {
+        border-radius: 12px;
+        height: 280px;
+    }
+}
