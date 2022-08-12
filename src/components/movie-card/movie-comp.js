@@ -1,7 +1,7 @@
 import './movie-comp.scss'
 
-const MovieCard = ({movie}) => {
-    const {title, name, overview, poster_path, media_type, release_date, first_air_date, vote_average, } = movie;
+const MovieCard = ({movie, media_type_series}) => {
+    const {title, name, overview, poster_path, media_type, release_date, first_air_date, vote_average } = movie;
 
   return (
     <div className="movie-card">
@@ -21,11 +21,20 @@ const MovieCard = ({movie}) => {
         ) : (
           <p className="movie-date">{first_air_date}</p>
         )}
-        {media_type === "tv" ? (
-          <p className="movie-type">Tv Series</p>
-        ) : (
-          <p className="movie-type">Movies</p>
+        
+        {media_type_series ? 
+          (<p className="movie-type">{media_type_series}</p>) 
+          : 
+          (
+          <div>
+            {media_type === "tv" ? (
+            <p className="movie-type">Tv Series</p>
+            ) : (
+            <p className="movie-type">Movies</p>
+            )}
+          </div>
         )}
+        
       </div>
       {/* <p>{vote_average}</p> */}
     </div>
