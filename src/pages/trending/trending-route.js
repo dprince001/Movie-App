@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 
 import MovieCard from "../../components/movie-card/movie-comp";
+import {ReactComponent as Spinner} from '../../assets/loader.svg'
 
 
 import './trending-route.scss'
@@ -45,17 +46,20 @@ const Trending = () => {
     <p className="trending-title">TRENDING TODAY</p>
     <div className="movies-container">
       {/* TODO: add spinner */}
-        {loading ? <p>Loading.....</p> : data.map(movie => 
+        {loading ? <Spinner className="spinner"/> : data.map(movie => 
             <MovieCard key={movie.id} movie={movie}/>
         )}
         {/* TODO: pagination */}
     </div>
-      <ReactPaginate 
+      {!loading && <ReactPaginate 
         className="pagination" 
         onPageChange={gotoPage}
         pageCount={10}
         activeClassName='pageActive'
+        previousClassName="previous-page"
+        nextClassName="next-page"
         />
+      }
 </div>;
 };
 

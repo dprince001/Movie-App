@@ -18,6 +18,14 @@
     row-gap: 30px;
     column-gap: 20px;
 
+    .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: spin 1s infinite;
+    }
+
     @media (max-width: 1100px) {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -34,6 +42,14 @@
         grid-template-columns: 1fr;
     }
 }
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    } 100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 .pagination {
     display: flex;
@@ -52,6 +68,12 @@
         &:hover {
             background-color: #CED1D6;
             color: #282C34;
+        }
+    }
+
+    .previous-page, .next-page {
+        @media (max-width: 500px) {
+            display: none;
         }
     }
 
