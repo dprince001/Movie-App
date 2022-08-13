@@ -10,6 +10,7 @@ const MovieCard = ({movie, media_type_series}) => {
         src={`https://image.tmdb.org/t/p/w300${poster_path}`}
         alt={`${title} image`}
       />
+      <span className={`votes ${vote_average < 5 ? 'low-votes' : ''}`}>{vote_average.toFixed(1)}</span>
       {title ? (
         <p className="movie-title">{title}</p>
       ) : (
@@ -21,22 +22,19 @@ const MovieCard = ({movie, media_type_series}) => {
         ) : (
           <p className="movie-date">{first_air_date}</p>
         )}
-        
-        {media_type_series ? 
-          (<p className="movie-type">{media_type_series}</p>) 
-          : 
-          (
+
+        {media_type_series ? (
+          <p className="movie-type">{media_type_series}</p>
+        ) : (
           <div>
             {media_type === "tv" ? (
-            <p className="movie-type">Tv Series</p>
+              <p className="movie-type">Tv Series</p>
             ) : (
-            <p className="movie-type">Movies</p>
+              <p className="movie-type">Movies</p>
             )}
           </div>
         )}
-        
       </div>
-      {/* <p>{vote_average}</p> */}
     </div>
   );
 }

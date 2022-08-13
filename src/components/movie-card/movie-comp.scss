@@ -2,10 +2,27 @@
     border-radius: 12px;
     padding: 5px;
     background-color: #282C34;
+    position: relative;
 
     &:hover {
         background-color: #CED1D6;
         color: #282C34;
+    }
+
+    .votes {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        background-color: #3F51B5;
+        z-index: 3;
+        padding: 3px 8px;
+        font-size: 14px;
+        border-radius: 8px;
+        color: #fff;
+
+        &.low-votes {
+            background-color: red;
+        }
     }
 
     div {

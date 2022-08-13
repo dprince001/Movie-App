@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import Pagination from '@mui/material/Pagination';
 
 import MovieCard from '../../components/movie-card/movie-comp';
 
@@ -14,18 +15,19 @@ const SearchPage = () => {
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState('movie') // otherwise tv
   
   const fetchSearchByCategory = async () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${category}?api_key=90ee1b388e8335299ffc93e65938366f&language=en-US&query=${searchInput}&page=${page + 1}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${category}?api_key=90ee1b388e8335299ffc93e65938366f&language=en-US&query=${searchInput}&page=${page}&include_adult=false`
       );
-      // console.log(data);
       setSearchData(data.results);
       setLoading(false);
+      setTotalPages(data.total_pages);
     } catch(error) {
       alert('something went wrong :(');
       console.log(error);
@@ -49,6 +51,10 @@ const SearchPage = () => {
   const setMovieCategory = (category) => {
     setCategory(category);
   }
+
+  const handlePageChange = (event, page) => {
+    setPage(page);
+  };
   
   return (
     <div>
@@ -64,8 +70,18 @@ const SearchPage = () => {
         </button>
       </form>
       <div className="category-container">
-        <button onClick={() => setMovieCategory('movie')} className={category === 'movie' ? 'active' : ''}>Search Movies</button>
-        <button onClick={() => setMovieCategory('tv')} className={category === 'tv' ? 'active' : ''}>Search Tv Series</button>
+        <button
+          onClick={() => setMovieCategory("movie")}
+          className={category === "movie" ? "active" : ""}
+        >
+          Search Movies
+        </button>
+        <button
+          onClick={() => setMovieCategory("tv")}
+          className={category === "tv" ? "active" : ""}
+        >
+          Search Tv Series
+        </button>
       </div>
       <div className="movies-container">
         {loading ? (
@@ -73,6 +89,9 @@ const SearchPage = () => {
         ) : (
           searchData.map((movie) => <MovieCard key={movie.id} movie={movie} />)
         )}
+      </div>
+      <div className="pagination-container">
+        <Pagination count={totalPages} color="primary" onChange={handlePageChange} />
       </div>
     </div>
   );
