@@ -55,6 +55,7 @@ const Trending = () => {
       <div className="pagination-container">
         <Pagination count={totalPages} color="primary" onChange={handleChange} />
       </div>
+
     </div>
   );
 };

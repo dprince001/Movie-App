@@ -4,9 +4,16 @@
     background-color: #282C34;
     position: relative;
 
+    a {
+        color: #fff;
+    }
+
     &:hover {
         background-color: #CED1D6;
-        color: #282C34;
+
+        a {
+            color: #282C34;
+        }
     }
 
     .votes {

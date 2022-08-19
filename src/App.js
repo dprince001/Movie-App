@@ -6,7 +6,7 @@ import Trending from "./pages/trending/trending-route";
 import MoviePage from "./pages/movies/movies-route";
 import SearchPage from "./pages/search/search-route";
 import SeriesPage from "./pages/series/series-route";
-
+import ClickedMovie from "./pages/clicked-movie/clickedMovie";
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
           <Route path="/movies" element={<MoviePage />} />
           <Route path="/series" element={<SeriesPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/clickedMovie/:movieID/:movieType" element={<ClickedMovie />} />
         </Routes>
       </div>
       <Navigation />
