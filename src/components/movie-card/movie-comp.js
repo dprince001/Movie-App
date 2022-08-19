@@ -1,7 +1,9 @@
 import './movie-comp.scss'
 
 const MovieCard = ({movie, media_type_series}) => {
-    const {title, name, overview, poster_path, media_type, release_date, first_air_date, vote_average } = movie;
+    const {title, name, overview, poster_path, media_type, release_date, first_air_date, vote_average, genre_ids } = movie;
+
+    // console.log(genre_ids);
 
   return (
     <div className="movie-card">

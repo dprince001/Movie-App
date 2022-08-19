@@ -30,12 +30,39 @@ const MoviePage = () => {
     }
   }
 
+
+  const [similarMovies, setSimilarMovies] = useState([]);
+
+
+  const ids = [10947];
+
+  const fetchSimilarMoviesOrSeries = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/${ids}/similar?api_key=90ee1b388e8335299ffc93e65938366f&language=en-US&page=${page}`
+      );
+      // console.log(data);
+      setMoviesData(data.results);
+    } catch(error) {
+      alert('error in getting similar movies');
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchMovies();
   }, [page]);
 
+  useEffect(() => {
+    if(ids.length > 0) fetchSimilarMoviesOrSeries();
+  }, []);
+
   const handlePageChange = (event, page) => {
     setPage(page);
+  }
+
+  if (loading) {
+    return <Spinner className="spinner" />;
   }
 
   return (
@@ -45,11 +72,9 @@ const MoviePage = () => {
         <Category type='movie'/>
       </div>
       <div className="movies-container">
-        {loading ? (
-          <Spinner className="spinner" />
-        ) : (
+        {
           moviesData.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-        )}
+        }
       </div>
       <div className='pagination-container'>
         <Pagination 

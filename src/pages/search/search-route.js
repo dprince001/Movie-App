@@ -56,6 +56,10 @@ const SearchPage = () => {
     setPage(page);
   };
   
+  if (loading) {
+    return <Spinner className="spinner" />;
+  }
+
   return (
     <div>
       <form onSubmit={submitHandler} className="search-container">
@@ -84,11 +88,9 @@ const SearchPage = () => {
         </button>
       </div>
       <div className="movies-container">
-        {loading ? (
-          <Spinner className="spinner" />
-        ) : (
+        {
           searchData.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-        )}
+        }
       </div>
       <div className="pagination-container">
         <Pagination count={totalPages} color="primary" onChange={handlePageChange} />

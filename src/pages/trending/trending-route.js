@@ -38,17 +38,20 @@ const Trending = () => {
     setPage(page);
   };
 
+  if(loading) {
+    return (
+      <Spinner className="spinner" />
+    )
+  }
+
   return (
     <div className="trending">
       <p className="title">TRENDING TODAY</p>
       <div className="movies-container">
-        {loading ? (
-          <Spinner className="spinner" />
-        ) : (
+        {
           data.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-        )}
+        }
       </div>
-      {/* TODO: pagination should be a component */}
       <div className="pagination-container">
         <Pagination count={totalPages} color="primary" onChange={handleChange} />
       </div>

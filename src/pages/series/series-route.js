@@ -37,6 +37,12 @@ const SeriesPage = () => {
     setPage(page);
   };
 
+  if (loading) {
+    return (
+      <Spinner className="spinner" />
+    )
+  }
+
   return (
     <div>
       <p className="title">DISCOVER SERIES</p>
@@ -44,9 +50,7 @@ const SeriesPage = () => {
         <Category type="tv" />
       </div>
       <div className="movies-container">
-        {loading ? (
-          <Spinner className="spinner" />
-        ) : (
+        {
           seriesData.map((movie) => (
             <MovieCard
               key={movie.id}
@@ -54,7 +58,7 @@ const SeriesPage = () => {
               media_type_series="Tv Series"
             />
           ))
-        )}
+        }
       </div>
       <div className="pagination-container">
         <Pagination
