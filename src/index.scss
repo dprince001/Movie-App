@@ -12,13 +12,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 .App {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // position: relative;
+  position: relative;
 }
 
 .content {
@@ -35,3 +36,6 @@ body {
   align-items: center;
   margin: 20px 0;
 }
+
+
+

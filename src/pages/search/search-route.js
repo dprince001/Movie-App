@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios';
-import Pagination from '@mui/material/Pagination';
+import ReactPaginate from "react-paginate";
 
 import MovieCard from '../../components/movie-card/movie-comp';
 
@@ -15,7 +15,7 @@ const SearchPage = () => {
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState('movie') // otherwise tv
   
@@ -23,7 +23,7 @@ const SearchPage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/${category}?api_key=90ee1b388e8335299ffc93e65938366f&language=en-US&query=${searchInput}&page=${page}&include_adult=false`
+        `https://api.themoviedb.org/3/search/${category}?api_key=90ee1b388e8335299ffc93e65938366f&language=en-US&query=${searchInput}&page=${page + 1}&include_adult=false`
       );
       setSearchData(data.results);
       setLoading(false);
@@ -36,6 +36,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     if(searchInput) fetchSearchByCategory();
+    window.scroll(0,0);
   }, [category, page])
 
 
@@ -52,13 +53,13 @@ const SearchPage = () => {
     setCategory(category);
   }
 
-  const handlePageChange = (event, page) => {
-    setPage(page);
+  const goToPage = ({ selected }) => {
+    setPage(selected);
   };
   
-  if (loading) {
-    return <Spinner className="spinner" />;
-  }
+  // if (loading) {
+  //   return <Spinner className="spinner" />;
+  // }
 
   return (
     <div>
@@ -88,12 +89,21 @@ const SearchPage = () => {
         </button>
       </div>
       <div className="movies-container">
-        {
-          searchData.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-        }
+        {searchData.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
       </div>
       <div className="pagination-container">
-        <Pagination count={totalPages} color="primary" onChange={handlePageChange} />
+        <ReactPaginate
+          pageCount={totalPages}
+          previousLabel="<<"
+          nextLabel=">>"
+          onPageChange={goToPage}
+          activeClassName="active-link"
+          previousClassName="previous-link"
+          nextClassName="next-link"
+          containerClassName="page-btns"
+        />
       </div>
     </div>
   );
