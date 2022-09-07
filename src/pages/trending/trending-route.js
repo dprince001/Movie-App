@@ -60,8 +60,6 @@ const Trending = () => {
       <div className="pagination-container">
         <ReactPaginate
           pageCount={totalPages}
-          previousLabel="<<"
-          nextLabel=">>"
           onPageChange={goToPage}
           activeClassName="active-link"
           previousClassName="previous-link"
